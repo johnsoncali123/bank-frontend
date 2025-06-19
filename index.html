@@ -14,6 +14,14 @@
     }
     input, button, select { margin: 5px 0; display: block; }
     #menu, #loginSection, #loanSection, #transactSection { margin-top: 20px; }
+	#welcomeMsg {
+      color: darkblue;
+      font-weight: bold;
+    }
+	#loanDetails {
+	  color: darkblue;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -79,7 +87,7 @@
                   inPacket = msg;
                   if (inPacket.type !== 0) {
                     accountData = inPacket.data;
-					document.getElementById("welcomeMsg").textContent = `<span style="color: darkblue; font-weight: bold;">Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+					document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
                   }
                 } else {
                   log("Server error: code mismatch");
@@ -135,7 +143,7 @@
         accountData = inPacket.data;
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("menu").style.display = "block";
-        document.getElementById("welcomeMsg").textContent = `<span style="color: darkblue; font-weight: bold;">Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+        document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
       }
     }
 
@@ -164,7 +172,7 @@
       } else {
         alert("Transaction failed.");
       }
-      document.getElementById("welcomeMsg").textContent = `<span style="color: darkblue; font-weight: bold;">Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+      document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
     }
 
     function showTransact() {
@@ -176,10 +184,10 @@
     function showLoan() {
       const loan = loanCalculate();
       const rate = (accountData[3] * 100).toFixed(2);
-      document.getElementById("loanDetails").textContent = `<span style="color: darkblue; font-weight: bold;">Current loan: ¤${loan}\nRate: ${rate}%/day`;
+      document.getElementById("loanDetails").textContent = `Current loan: ¤${loan}\nRate: ${rate}%/day`;
       document.getElementById("loanSection").style.display = "block";
       document.getElementById("transactSection").style.display = "none";
-      document.getElementById("welcomeMsg").textContent = `<span style="color: darkblue; font-weight: bold;">Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+      document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
 	  document.getElementById("historyBox").style.display = "none";
     }
 
