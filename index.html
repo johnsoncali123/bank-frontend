@@ -87,7 +87,7 @@
                   inPacket = msg;
                   if (inPacket.type !== 0) {
                     accountData = inPacket.data;
-					document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+					welcome();
                   }
                 } else {
                   log("Server error: code mismatch");
@@ -104,6 +104,10 @@
         await sleep(500);
       }
     }
+	
+	function welcome() {
+		document.getElementById("welcomeMsg").textContent = `Welcome, ${accountData[0]}.\n Balance: ¤${getBalance()}`;
+	};
 
     async function sendOut(to, dataType, packet) {
       messageCode = Math.floor(Math.random() * 9999);
@@ -143,7 +147,7 @@
         accountData = inPacket.data;
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("menu").style.display = "block";
-        document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+        welcome();
       }
     }
 
@@ -172,7 +176,7 @@
       } else {
         alert("Transaction failed.");
       }
-      document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+      welcome();
     }
 
     function showTransact() {
@@ -187,7 +191,7 @@
       document.getElementById("loanDetails").textContent = `Current loan: ¤${loan}\nRate: ${rate}%/day`;
       document.getElementById("loanSection").style.display = "block";
       document.getElementById("transactSection").style.display = "none";
-      document.getElementById("welcomeMsg").textContent = `Welcome ${accountData[0]}, Balance: ¤${getBalance()}`;
+      welcome();
 	  document.getElementById("historyBox").style.display = "none";
     }
 
