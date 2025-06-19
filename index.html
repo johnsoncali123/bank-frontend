@@ -53,7 +53,7 @@
     <button onclick="submitLoanPayment()">Pay Loan</button>
   </div>
   
-  <div id="historyBox" style="display: none; border: 3px solid #ccc; padding: 10px; width: 200px; margin: 0 auto"></div>
+  <div id="historyBox" style="display: none; border: 3px solid #ccc; padding: 10px; width: 400px; margin: 0 auto"></div>
 
   <script>
     const historyBox = document.getElementById("historyBox");
@@ -214,7 +214,7 @@
 
     function transactionHistory() {
       const txs = accountData[2] || [];
-      let output = `<span style="color: black;">Transaction History:\n`;
+      let output = `<span style="color: black; font-weight: bold;">Transaction History:\n`;
       txs.slice().reverse().forEach(tx => {
         const diff = ((Date.now() - tx[2]) / 3600000).toFixed(1);
         const time = diff > 24 ? `${(diff / 24).toFixed(1)} days ago` : `${diff} hours ago`;
