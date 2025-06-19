@@ -10,6 +10,7 @@
       border: 1px solid #ccc;
       margin-top: 20px;
       height: 300px;
+	  width: 300px;
       overflow-y: scroll;
     }
     input, button, select { margin: 5px 0; display: block; }
@@ -17,10 +18,12 @@
 	#welcomeMsg {
       color: darkblue;
       font-weight: bold;
+	  white-space: pre-line;
     }
 	#loanDetails {
 	  color: darkblue;
       font-weight: bold;
+	  white-space: pre-line;
     }
   </style>
 </head>
@@ -53,7 +56,7 @@
     <button onclick="submitLoanPayment()">Pay Loan</button>
   </div>
   
-  <div id="historyBox" style="display: none; border: 3px solid #ccc; padding: 10px; width: 400px; margin: 0 auto"></div>
+  <div id="historyBox" style="display: none; border: 3px solid #ccc; padding: 10px; width: 300px; margin: 0 auto; padding-right: 50px"></div>
 
   <script>
     const historyBox = document.getElementById("historyBox");
