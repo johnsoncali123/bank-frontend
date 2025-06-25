@@ -139,7 +139,7 @@
 
     async function submitLogin() {
       account = parseInt(document.getElementById("accountInput").value);
-      password = parseInt(document.getElementById("passwordInput").value);
+      password = document.getElementById("passwordInput").value;
       await sendOut(3000, 2, [account, password]);
       await waitForPacket();
 
