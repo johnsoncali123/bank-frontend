@@ -24,6 +24,30 @@
       border-color: #4a90e2;
       box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
     }
+	  .alert-box {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f44336;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+  max-width: 90%;
+  text-align: center;
+  animation: fadein 0.5s;
+}
+.alert-success { background-color: #4CAF50; }
+.alert-info    { background-color: #2196F3; }
+.alert-error   { background-color: #f44336; }
+@keyframes fadein {
+  from { opacity: 0; top: 10px; }
+  to { opacity: 1; top: 30px; }
+}
     .label {
       display: block;
       margin-bottom: 6px;
@@ -80,7 +104,8 @@ margin: 10px auto;
   </style>
 </head>
 <body>
-  	<img src="static/IMG_1553.png" alt="Logo" style="height: 200px; width: 200px; display: block; margin: 0 auto;">
+   <div id="alertBox" class="alert-box" style="display:none;"></div
+   <img src="static/IMG_1553.png" alt="Logo" style="height: 200px; width: 200px; display: block; margin: 0 auto;">
 	<div id="loginSection" style="width: 200px; margin: 0 auto; padding: 15px">
     	<input type="number" id="accountInput" class="textbox" placeholder="Account Number">
 	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
@@ -127,6 +152,14 @@ margin: 10px auto;
     async function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+function showAlert(message, type = "error", duration = 3000) {
+  const box = document.getElementById("alertBox");
+  box.className = `alert-box alert-${type}`;
+  box.textContent = message;
+  box.style.display = "block";
+  setTimeout(() => { box.style.display = "none"; }, duration);
+}
 
     async function waitForPacket() {
       while (true) {
@@ -181,10 +214,10 @@ margin: 10px auto;
         });
 
         if (!res.ok) {
-          alert("Send failed: " + res.statusText);
+          showAlert("Send failed: " + res.statusText);
         }
       } catch (err) {
-        alert("Send error: " + err);
+        showAlert("Send error: " + err);
       }
     }
 
@@ -195,7 +228,7 @@ margin: 10px auto;
       await waitForPacket();
 
       if (inPacket.type === 0) {
-        alert("Incorrect login. Try again.");
+        sendAlert("Incorrect login. Try again.");
         location.reload();
       } else {
         accountData = inPacket.data;
@@ -218,7 +251,7 @@ margin: 10px auto;
       const to = parseInt(document.getElementById("recipient").value);
       const amount = roundCent(parseFloat(document.getElementById("amount").value));
       if (isNaN(to) || isNaN(amount)) {
-        alert("Invalid input.");
+        sendAlert("Invalid input.");
         return;
       }
 	  document.getElementById("transactSection").style.display = "none";
@@ -226,9 +259,9 @@ margin: 10px auto;
       await waitForPacket();
       if (inPacket.type !== 0) {
         accountData = inPacket.data;
-        alert("Transaction successful.");
+        sendAlert("Transaction successful.", "success");
       } else {
-        alert("Transaction failed.");
+        sendAlert("Transaction failed.");
       }
       welcome();
     }
@@ -257,9 +290,9 @@ margin: 10px auto;
         await waitForPacket();
         if (inPacket.type !== 0) {
           accountData = inPacket.data;
-          alert("Loan payment successful.");
+          sendAlert("Loan payment successful.", "success");
         } else {
-          alert("Payment failed.");
+          sendAlert("Payment failed.");
         }
       }
     }
