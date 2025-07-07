@@ -55,11 +55,11 @@
   </style>
 </head>
 <body>
-  	<img src="{{ url_for(filename='IMG_1553.png') }}" alt="Logo" style="height: 200px; width: 200px;">
+  	<img src="{{ url_for('static', filename='IMG_1553.png') }}" alt="Logo" style="height: 200px; width: 200px;">
 	<div id="loginSection" style="width: 200px; margin: 0 auto; padding: 15px">
     	<input type="number" id="accountInput" placeholder="Account Number">
 	<input type="text" id="passwordInput" placeholder="Password">
-    	<button onclick="submitLogin()">LOGIN</button>
+    	<button onclick="submitLogin()">Login</button>
   </div>
 
   <div id="menu" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
