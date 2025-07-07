@@ -4,7 +4,34 @@
   <meta charset="UTF-8" />
   <title>Bank of Europe</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 50px;
+    }
+    .textbox {
+      width: 300px;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .textbox:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+    }
+    .label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
     #output, #historyBox {
       white-space: pre-wrap;
       border: 1px solid #ccc;
