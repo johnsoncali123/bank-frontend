@@ -57,8 +57,8 @@
 <body>
   	<img src="static/IMG_1553.png" alt="Logo" style="height: 200px; width: 200px; display: block; margin: 0 auto;">
 	<div id="loginSection" style="width: 200px; margin: 0 auto; padding: 15px">
-    	<input type="number" id="accountInput" placeholder="Account Number">
-	<input type="text" id="passwordInput" placeholder="Password">
+    	<input type="number" id="accountInput" class="textbox" placeholder="Account Number">
+	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
     	<button onclick="submitLogin()">Sign In</button>
   </div>
 
@@ -71,14 +71,14 @@
   </div>
 
   <div id="transactSection" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
-    <input type="number" id="recipient" placeholder="Recipient Account">
-    <input type="number" id="amount" placeholder="Amount">
+    <input type="number" id="recipient" class="textbox" placeholder="Recipient Account">
+    <input type="number" id="amount" class="textbox" placeholder="Amount">
     <button onclick="submitTransaction()">Send</button>
   </div>
 
   <div id="loanSection" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
     <p id="loanDetails"></p>
-    <input type="number" id="loanPayment" placeholder="Payment Amount">
+    <input type="number" id="loanPayment" class="textbox" placeholder="Payment Amount">
     <button onclick="submitLoanPayment()">Pay Loan</button>
   </div>
   
