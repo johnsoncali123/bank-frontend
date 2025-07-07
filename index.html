@@ -116,7 +116,7 @@ margin: 10px auto;
   pattern="[0-9]*"
 />
 	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
-    	<button class="button" onclick="submitLogin()">Sign In</button>
+    	<button class="button" onclick="submitLogin()">SIGN IN</button>
   </div>
 
   <div id="menu" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
@@ -160,7 +160,7 @@ margin: 10px auto;
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-function sendAlert(message, type = "error", duration = 3000) {
+function showAlert(message, type = "error", duration = 3000) {
   const box = document.getElementById("alertBox");
   box.className = `alert-box alert-${type}`;
   box.textContent = message;
@@ -221,10 +221,10 @@ function sendAlert(message, type = "error", duration = 3000) {
         });
 
         if (!res.ok) {
-          sendAlert("Send failed: " + res.statusText);
+          showAlert("Send failed: " + res.statusText);
         }
       } catch (err) {
-        sendAlert("Send error: " + err);
+        showAlert("Send error: " + err);
       }
     }
 
@@ -235,7 +235,7 @@ function sendAlert(message, type = "error", duration = 3000) {
       await waitForPacket();
 
       if (inPacket.type === 0) {
-        sendAlert("Incorrect login. Try again.");
+        showAlert("Incorrect login. Try again.");
         location.reload();
       } else {
         accountData = inPacket.data;
@@ -258,7 +258,7 @@ function sendAlert(message, type = "error", duration = 3000) {
       const to = parseInt(document.getElementById("recipient").value);
       const amount = roundCent(parseFloat(document.getElementById("amount").value));
       if (isNaN(to) || isNaN(amount)) {
-        sendAlert("Invalid input.");
+        showAlert("Invalid input.");
         return;
       }
 	  document.getElementById("transactSection").style.display = "none";
@@ -266,9 +266,9 @@ function sendAlert(message, type = "error", duration = 3000) {
       await waitForPacket();
       if (inPacket.type !== 0) {
         accountData = inPacket.data;
-        sendAlert("Transaction successful.", "success");
+        showAlert("Transaction successful.", "success");
       } else {
-        sendAlert("Transaction failed.");
+        showAlert("Transaction failed.");
       }
       welcome();
     }
@@ -297,9 +297,9 @@ function sendAlert(message, type = "error", duration = 3000) {
         await waitForPacket();
         if (inPacket.type !== 0) {
           accountData = inPacket.data;
-          sendAlert("Loan payment successful.", "success");
+          showAlert("Loan payment successful.", "success");
         } else {
-          sendAlert("Payment failed.");
+          showAlert("Payment failed.");
         }
       }
     }
