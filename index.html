@@ -107,9 +107,16 @@ margin: 10px auto;
    <div id="alertBox" class="alert-box" style="display:none;"></div>
    <img src="static/IMG_1553.png" alt="Logo" style="height: 200px; width: 200px; display: block; margin: 0 auto;">
 	<div id="loginSection" style="width: 200px; margin: 0 auto; padding: 15px">
-    	<input type="number" id="accountInput" class="textbox" placeholder="Account Number">
+    	<input
+  type="text"
+  id="accountInput"
+  class="textbox"
+  placeholder="Account Number"
+  inputmode="numeric"
+  pattern="[0-9]*"
+/>
 	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
-    	<button class="button" onclick="submitLogin()">SIGN IN</button>
+    	<button class="button" onclick="submitLogin()">Sign In</button>
   </div>
 
   <div id="menu" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
@@ -153,7 +160,7 @@ margin: 10px auto;
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-function showAlert(message, type = "error", duration = 3000) {
+function sendAlert(message, type = "error", duration = 3000) {
   const box = document.getElementById("alertBox");
   box.className = `alert-box alert-${type}`;
   box.textContent = message;
@@ -214,10 +221,10 @@ function showAlert(message, type = "error", duration = 3000) {
         });
 
         if (!res.ok) {
-          showAlert("Send failed: " + res.statusText);
+          sendAlert("Send failed: " + res.statusText);
         }
       } catch (err) {
-        showAlert("Send error: " + err);
+        sendAlert("Send error: " + err);
       }
     }
 
