@@ -116,7 +116,7 @@ margin: 10px auto;
   pattern="[0-9]*"
 />
 	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
-    	<button class="button" onclick="submitLogin()">SIGN IN</button>
+    	<button class="button" onclick="submitLogin()">Sign In</button>
   </div>
 
   <div id="menu" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
@@ -236,7 +236,6 @@ function showAlert(message, type = "error", duration = 3000) {
 
       if (inPacket.type === 0) {
         showAlert("Incorrect login. Try again.");
-        location.reload();
       } else {
         accountData = inPacket.data;
         document.getElementById("loginSection").style.display = "none";
