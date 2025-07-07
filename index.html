@@ -10,11 +10,11 @@
       padding: 50px;
     }
     .textbox {
-      width: 300px;
+      width: 200px;
       padding: 12px 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       transition: border-color 0.3s, box-shadow 0.3s;
     }
@@ -32,6 +32,29 @@
     .form-group {
       margin-bottom: 20px;
     }
+	  .button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+display: block;
+margin: 10px auto;
+}
+
+.button:hover {
+  background-color: #357ab8;
+  transform: scale(1.02);
+}
+
+.button:active {
+  background-color: #2d639c;
+  transform: scale(0.98);
+}
     #output, #historyBox {
       white-space: pre-wrap;
       border: 1px solid #ccc;
@@ -59,27 +82,27 @@
 	<div id="loginSection" style="width: 200px; margin: 0 auto; padding: 15px">
     	<input type="number" id="accountInput" class="textbox" placeholder="Account Number">
 	<input type="text" id="passwordInput" class="textbox" placeholder="Password">
-    	<button onclick="submitLogin()">Sign In</button>
+    	<button class="button" onclick="submitLogin()">Sign In</button>
   </div>
 
   <div id="menu" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
     <p id="welcomeMsg"></p>
-    <button onclick="transactionHistory()">View History</button>
-    <button onclick="showTransact()">Send Money</button>
-    <button onclick="showLoan()">Loan</button>
+    <button class="button" onclick="transactionHistory()">View History</button>
+    <button class="button" onclick="showTransact()">Send Money</button>
+    <button class="button" onclick="showLoan()">Loan</button>
     <div id="historyBox"></div>
   </div>
 
   <div id="transactSection" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
     <input type="number" id="recipient" class="textbox" placeholder="Recipient Account">
     <input type="number" id="amount" class="textbox" placeholder="Amount">
-    <button onclick="submitTransaction()">Send</button>
+    <button class="button" onclick="submitTransaction()">Send</button>
   </div>
 
   <div id="loanSection" style="display:none; width: 200px; margin: 0 auto; padding: 15px">
     <p id="loanDetails"></p>
     <input type="number" id="loanPayment" class="textbox" placeholder="Payment Amount">
-    <button onclick="submitLoanPayment()">Pay Loan</button>
+    <button class="button" onclick="submitLoanPayment()">Pay Loan</button>
   </div>
   
   <div id="historyBox" style="display: none; border: 3px solid #ccc; padding: 10px; width: 300px; margin: 0 auto; padding-right: 50px"></div>
