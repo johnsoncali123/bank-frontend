@@ -124,6 +124,7 @@ margin: 10px auto;
     <button class="button" onclick="transactionHistory()">View History</button>
     <button class="button" onclick="showTransact()">Send Money</button>
     <button class="button" onclick="showLoan()">Loan</button>
+    <button class="button" onclick="logout()">Log Out</button>
     <div id="historyBox"></div>
   </div>
 
@@ -154,11 +155,40 @@ margin: 10px auto;
     let inPacket = {};
     let computerID = Math.floor(Math.random() * 2999);
     let messageCode = 0;
-	document.getElementById("historyBox").style.display = "none";
+    document.getElementById("historyBox").style.display = "none";
+    window.addEventListener("load", async () => {
+  const savedAcc = getCookie("savedAccount");
+  const savedPwd = getCookie("savedPassword");
+  if (savedAcc && savedPwd) {
+    document.getElementById("accountInput").value = savedAcc;
+    document.getElementById("passwordInput").value = savedPwd;
+    account = parseInt(savedAcc);
+    password = savedPwd;
+    await sendOut(3000, 2, [account, password]);
+    await waitForPacket();
+
+    if (inPacket.type !== 0) {
+      accountData = inPacket.data;
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("menu").style.display = "block";
+      welcome();
+    } else {
+      showAlert("Saved login failed.");
+      deleteCookie("savedAccount");
+      deleteCookie("savedPassword");
+    }
+  }
+});
 
     async function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
+
+function logout() {
+  deleteCookie("savedAccount");
+  deleteCookie("savedPassword");
+  location.reload();
+}
 
 function showAlert(message, type = "error", duration = 3000) {
   const box = document.getElementById("alertBox");
@@ -166,6 +196,22 @@ function showAlert(message, type = "error", duration = 3000) {
   box.textContent = message;
   box.style.display = "block";
   setTimeout(() => { box.style.display = "none"; }, duration);
+}
+
+function setCookie(name, value, days = 7) {
+  const expires = new Date(Date.now() + days*864e5).toUTCString();
+  document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
+}
+
+function getCookie(name) {
+  return document.cookie.split("; ").reduce((r, v) => {
+    const parts = v.split("="); 
+    return parts[0] === name ? decodeURIComponent(parts[1]) : r
+  }, null);
+}
+
+function deleteCookie(name) {
+  document.cookie = name + '=; Max-Age=0; path=/';
 }
 
     async function waitForPacket() {
@@ -238,6 +284,8 @@ function showAlert(message, type = "error", duration = 3000) {
         showAlert("Incorrect login. Try again.");
       } else {
         accountData = inPacket.data;
+	setCookie("savedAccount", account);
+	setCookie("savedPassword", password);
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("menu").style.display = "block";
         welcome();
