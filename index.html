@@ -123,7 +123,7 @@ margin: 10px auto;
     <p id="welcomeMsg"></p>
     <button class="button" onclick="transactionHistory()">View History</button>
     <button class="button" onclick="showTransact()">Send Money</button>
-    <button class="button" onclick="showLoan()">Loan</button>
+    <button class="button" onclick="showLoan()">Pay Loan</button>
     <button class="button" onclick="logout()">Log Out</button>
     <div id="historyBox"></div>
   </div>
@@ -164,18 +164,13 @@ margin: 10px auto;
     document.getElementById("passwordInput").value = savedPwd;
     account = parseInt(savedAcc);
     password = savedPwd;
-    await sendOut(3000, 2, [account, password]);
-    await waitForPacket();
-
     if (inPacket.type !== 0) {
       accountData = inPacket.data;
       document.getElementById("loginSection").style.display = "none";
       document.getElementById("menu").style.display = "block";
       welcome();
     } else {
-      showAlert("Saved login failed.");
-      deleteCookie("savedAccount");
-      deleteCookie("savedPassword");
+      showAlert("Auto Login Failed.");
     }
   }
 });
