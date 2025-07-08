@@ -157,8 +157,8 @@ margin: 10px auto;
     let messageCode = 0;
     document.getElementById("historyBox").style.display = "none";
     window.addEventListener("load", async () => {
-  const savedAcc = getCookie("savedAccount");
-  const savedPwd = getCookie("savedPassword");
+  const savedAcc = localStorage.getItem("savedAccount");
+  const savedPwd = localStorage.getItem("savedPassword");
   if (savedAcc && savedPwd) {
     document.getElementById("accountInput").value = savedAcc;
     document.getElementById("passwordInput").value = savedPwd;
@@ -175,8 +175,8 @@ margin: 10px auto;
       welcome();
     } else {
       showAlert("Saved login failed.");
-      deleteCookie("savedAccount");
-      deleteCookie("savedPassword");
+      localStorage.removeItem("savedAccount");
+      localStorage.removeItem("savedPassword");
     }
   }
 });
@@ -186,8 +186,8 @@ margin: 10px auto;
     }
 
 function logout() {
-  deleteCookie("savedAccount");
-  deleteCookie("savedPassword");
+  localStorage.removeItem("savedAccount");
+  localStorage.removeItem("savedPassword");
   location.reload();
 }
 
@@ -198,23 +198,6 @@ function showAlert(message, type = "error", duration = 3000) {
   box.style.display = "block";
   setTimeout(() => { box.style.display = "none"; }, duration);
 }
-
-function setCookie(name, value, days = 7) {
-  const expires = new Date(Date.now() + days*864e5).toUTCString();
-  document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
-}
-
-function getCookie(name) {
-  return document.cookie.split("; ").reduce((r, v) => {
-    const parts = v.split("="); 
-    return parts[0] === name ? decodeURIComponent(parts[1]) : r
-  }, null);
-}
-
-function deleteCookie(name) {
-  document.cookie = name + '=; Max-Age=0; path=/';
-}
-
     async function waitForPacket() {
       while (true) {
         try {
@@ -285,8 +268,8 @@ function deleteCookie(name) {
         showAlert("Incorrect login. Try again.");
       } else {
         accountData = inPacket.data;
-	setCookie("savedAccount", account);
-	setCookie("savedPassword", password);
+	localStorage.setItem("savedAccount", account);
+	localStorage.setItem("savedPassword", password);
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("menu").style.display = "block";
         welcome();
