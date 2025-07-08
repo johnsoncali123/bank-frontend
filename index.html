@@ -164,6 +164,7 @@ margin: 10px auto;
     document.getElementById("passwordInput").value = savedPwd;
     account = parseInt(savedAcc);
     password = savedPwd;
+    showAlert("Autofilled Details", "info");
     await sendOut(3000, 2, [account, password]);
     await waitForPacket();
 
