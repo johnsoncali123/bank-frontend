@@ -164,13 +164,18 @@ margin: 10px auto;
     document.getElementById("passwordInput").value = savedPwd;
     account = parseInt(savedAcc);
     password = savedPwd;
+    await sendOut(3000, 2, [account, password]);
+    await waitForPacket();
+
     if (inPacket.type !== 0) {
       accountData = inPacket.data;
       document.getElementById("loginSection").style.display = "none";
       document.getElementById("menu").style.display = "block";
       welcome();
     } else {
-      showAlert("Auto Login Failed.");
+      showAlert("Saved login failed.");
+      deleteCookie("savedAccount");
+      deleteCookie("savedPassword");
     }
   }
 });
